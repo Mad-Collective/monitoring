@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  php7:
+    build: ./7
+    volumes:
+      - ../../:/app/logging
+    working_dir: /app/logging
+    command: make test
+
+  php56:
+      build: ./56
+      volumes:
+        - ../../:/app/logging
+      working_dir: /app/logging
+      command: make test

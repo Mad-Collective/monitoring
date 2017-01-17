@@ -1,0 +1,10 @@
+formatter.name: pretty
+rerunner:
+  path: vendor/bin/phpspec
+  commands: [describe]
+
+suites:
+  logging:
+    spec_path: .
+    namespace: Cmp\Monitoring
+    psr4_prefix: Cmp\Monitorings
