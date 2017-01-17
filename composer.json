@@ -1,0 +1,32 @@
+{
+  "name": "pluggit/monitoring",
+  "description": "Monitoring abstraction layer",
+  "require": {
+    "php": "^5.4|^7.0",
+    "psr/log": "^1.0"
+  },
+  "require-dev": {
+    "monolog/monolog": "^1.21",
+    "phpspec/phpspec": "^2.5",
+    "behat/behat": "^3.1",
+    "phpunit/phpunit": "4.8.*",
+    "squizlabs/php_codesniffer": "2.*",
+    "henrikbjorn/phpspec-code-coverage": "2.*"
+  },
+  "license": "MIT",
+  "config": {
+    "bin-dir": "bin"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cmp\\Monitoring\\": "src/",
+      "features\\Cmp\\Monitoring\\": "tests/features/bootstrap/"
+    }
+  },
+  "authors": [
+    {
+      "name": "jaroslawgabaracmp",
+      "email": "jaroslaw.gabara@teamcmp.com"
+    }
+  ]
+}

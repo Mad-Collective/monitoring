@@ -1,0 +1,7 @@
+/vendor/
+.idea
+/bin/
+/log/
+index.php
+coverage.clover
+coverage_integration.clover
