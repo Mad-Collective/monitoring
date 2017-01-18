@@ -4,7 +4,7 @@
   "require": {
     "php": "^5.4|^7.0",
     "psr/log": "^1.0",
-    "jms/serializer": "^1.4"
+    "jms/serializer": "0.16.0"
   },
   "require-dev": {
     "monolog/monolog": "^1.21",
