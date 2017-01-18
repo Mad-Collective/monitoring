@@ -1,7 +1,7 @@
 COMPONENT := pluggitmonitoring
 CONTAINER := phpfarm
 IMAGES ?= false
-APP_ROOT := /app/logging
+APP_ROOT := /app/monitoring
 
 all: dev nodev
 
@@ -14,16 +14,13 @@ ifeq ($(IMAGES),true)
 	@docker rmi ${COMPONENT}_${CONTAINER}
 endif
 
-test: unit integration
+test: unit
 
 deps:
 	@composer install --no-interaction
 
 unit:
 	@${APP_ROOT}/ops/scripts/unit.sh
-
-integration:
-	@${APP_ROOT}/ops/scripts/integration.sh
 
 ps: status
 status:

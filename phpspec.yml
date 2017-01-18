@@ -7,4 +7,4 @@ suites:
   logging:
     spec_path: .
     namespace: Cmp\Monitoring
-    psr4_prefix: Cmp\Monitorings
+    psr4_prefix: Cmp\Monitoring
