@@ -1,0 +1,8 @@
+build:
+    environment:
+        php: '5.4.41'
+    tests:
+        before:
+            - 'composer install'
+        override:
+            - 'make tests'
