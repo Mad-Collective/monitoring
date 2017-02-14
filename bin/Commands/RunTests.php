@@ -32,7 +32,7 @@ class RunTests extends Command
     protected function configure()
     {
         $this->baseDir = realpath(__DIR__.'/..').'/';
-
+var_dump($this->baseDir); die;
         $this
             ->setName('tests:coverage')
             ->setDescription('Runs the tests')
