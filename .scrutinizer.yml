@@ -5,4 +5,4 @@ build:
         before:
             - 'composer install'
         override:
-            - 'make test'
+            - 'make test APP_ROOT=$HOME/build'
