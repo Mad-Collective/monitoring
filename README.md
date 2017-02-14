@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/CMProductions/monitoring.svg?branch=master)](https://travis-ci.org/CMProductions/monitoring)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CMProductions/monitoring/badges/quality-score.png?b=master&s=6001a11048667bd084b7b535321c5fcf4f026e6d)](https://scrutinizer-ci.com/g/CMProductions/monitoring/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/CMProductions/monitoring/badges/coverage.png?b=master&s=c9d2a96bb748b69f39dc3491fdeb5f5b38ea062a)](https://scrutinizer-ci.com/g/CMProductions/monitoring/?branch=master)
 
 Monitoring is an application monitor and event service, which gives you ability to monitor and health check from the code.
 
