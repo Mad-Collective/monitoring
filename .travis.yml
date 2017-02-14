@@ -15,4 +15,4 @@ install:
 script:
   - bin/app tests:coverage clover
   - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --access_token=$SCRUTINIZER_TOKEN --format=php-clover clover.xml
+  - php ocular.phar code-coverage:upload --access-token="$SCRUTINIZER_TOKEN" --format=php-clover clover.xml
