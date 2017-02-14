@@ -1,5 +1,8 @@
 # Pluggit Monitoring
 
+[![Build Status](https://travis-ci.org/CMProductions/monitoring.svg?branch=master)](https://travis-ci.org/CMProductions/monitoring)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CMProductions/monitoring/badges/quality-score.png?b=master&s=6001a11048667bd084b7b535321c5fcf4f026e6d)](https://scrutinizer-ci.com/g/CMProductions/monitoring/?branch=master)
+
 Monitoring is an application monitor and event service, which gives you ability to monitor and health check from the code.
 
 ## Installation
