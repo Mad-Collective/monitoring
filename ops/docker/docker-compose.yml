@@ -21,10 +21,3 @@ services:
         - ../../:/app/monitoring
       working_dir: /app/monitoring
       command: make test
-
-  php54:
-      build: ./54
-      volumes:
-        - ../../:/app/monitoring
-      working_dir: /app/monitoring
-      command: make test

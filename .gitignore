@@ -1,6 +1,6 @@
 /vendor/
 .idea
-/bin/
+/bin/clover.xml
 /log/
 index.php
 coverage.clover

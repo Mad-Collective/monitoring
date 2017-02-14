@@ -199,8 +199,11 @@ $monitor->increment('wh.page_views');
 
 ## Available back end senders
 
-### Monolog
-With monolog senders you can send events and metrics to monolog _Logger Handlers_ serialized as JSON. The typical case scenario will be log to files but monolog has very powerful handlers that would let you log to databases, send mails or send the metrics and events to online platforms like Splunk. Of course, you can alse build custom ones.
+### Psr-3 logger
+With the psr-3 compatible sender you can send events and metrics to _PS-3 Logger Handlers_. The typical case scenario will be log to files but you can setup very powerful handlers by plug in, for example, Monolog (let you log to databases, send mails or send the metrics and events to online platforms like Splunk. Of course, you can also build custom ones.)
+
+```
+
 
 Example of setup
 ```php
@@ -221,7 +224,7 @@ $monitor->pushMetricSender($metricSender);
 $monitor->pushEventSender($eventSender);
 ```
 
-The senders accept a third parameters _level_ which is the level that the Logger is going to use to create the messages, so you could have different senders with different loggers depending on the level
+The senders accept a second parameters _level_ which is the level that the Logger is going to use to create the messages, so you could have different senders with different loggers depending on the level
 
 ```php
 $logger = new \Monolog\Logger('monitoring');
