@@ -2,13 +2,14 @@
 
 namespace Cmp\Monitoring;
 
-use Monolog\Logger;
 use Cmp\Monitoring\Metric\AbstractMetric;
 use Cmp\Monitoring\Metric\MetricFactory;
 use Cmp\Monitoring\Metric\SenderInterface as MetricSender;
 use Cmp\Monitoring\Event\Event;
 use Cmp\Monitoring\Event\EventFactory;
 use Cmp\Monitoring\Event\SenderInterface as EventSender;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Used for sending monitoring metrics and events to multiple back ends
@@ -35,7 +36,7 @@ class Monitor
     /**
      * Logger for errors
      * 
-     * @var Logger
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -45,12 +46,14 @@ class Monitor
      * @var MetricSender[]
      */
     protected $metricSenders = array();
+
     /**
      * Event senders
      *
      * @var EventSender[]
      */
     protected $eventSenders = array();
+
     /**
      * Registry of timers
      * 
@@ -61,15 +64,15 @@ class Monitor
     /**
      * On debug mode exceptions will be thrown
      *
-     * @param MetricFactory $metricFactory Factory for creating metrics
-     * @param EventFactory  $eventFactory  Factory for creating events
-     * @param Logger        $logger        For logging errors
+     * @param MetricFactory   $metricFactory Factory for creating metrics
+     * @param EventFactory    $eventFactory  Factory for creating events
+     * @param LoggerInterface $logger        For logging errors
      */
-    public function __construct(MetricFactory $metricFactory, EventFactory $eventFactory, Logger $logger)
+    public function __construct(MetricFactory $metricFactory, EventFactory $eventFactory, LoggerInterface $logger = null)
     {
         $this->metricFactory = $metricFactory;
-        $this->eventFactory = $eventFactory;
-        $this->logger = $logger;
+        $this->eventFactory  = $eventFactory;
+        $this->logger        = $logger instanceof LoggerInterface ? $logger : new NullLogger();
     }
 
     /**
@@ -398,7 +401,7 @@ class Monitor
         try {
             $this->logger->error($exception->getMessage() , array('exception' => $exception));
         } catch (\Exception $exception) {
-            // Do nothing
+            trigger_error("Error logging Monitor exception: ".$exception->getMessage());
         }
     }
 }

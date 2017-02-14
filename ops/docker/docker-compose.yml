@@ -14,3 +14,10 @@ services:
         - ../../:/app/monitoring
       working_dir: /app/monitoring
       command: make test
+
+  php55:
+      build: ./55
+      volumes:
+        - ../../:/app/monitoring
+      working_dir: /app/monitoring
+      command: make test

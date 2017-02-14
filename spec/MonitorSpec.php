@@ -9,12 +9,12 @@ use Cmp\Monitoring\Metric\AbstractMetric;
 use Cmp\Monitoring\Metric\MetricFactory;
 use Cmp\Monitoring\Metric\SenderInterface as MetricSender;
 use Cmp\Monitoring\Metric\Type\Timer;
-use Monolog\Logger;
 use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 
 class MonitorSpec extends ObjectBehavior
 {
-    function let(MetricFactory $metricFactory, EventFactory $eventFactory, Logger $logger)
+    function let(MetricFactory $metricFactory, EventFactory $eventFactory, LoggerInterface $logger)
     {
         $this->beConstructedWith($metricFactory, $eventFactory, $logger);
     }
@@ -134,12 +134,12 @@ class MonitorSpec extends ObjectBehavior
         $this->event('event', 'text', 'type',array('tags'), 10000);
     }
 
-    function it_can_log_errors_when_an_exception_is_found(EventFactory $eventFactory, EventSender $sender, Event $event, Logger $logger)
+    function it_can_log_errors_when_an_exception_is_found(EventFactory $eventFactory, EventSender $sender, Event $event, LoggerInterface $logger)
     {
         $exception = new \Exception( 'message' );
         $sender->send($event)->willThrow( $exception );
 
-        $logger->error('message', array('exception'=>$exception))->shouldBeCalled();
+        $logger->error('message', array('exception' => $exception))->shouldBeCalled();
         $eventFactory->addDefaultTagsToEntity($event)->shouldBeCalled();
 
         $this->pushEventSender($sender);

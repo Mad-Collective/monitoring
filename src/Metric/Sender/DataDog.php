@@ -88,20 +88,22 @@ class DataDog implements SenderInterface
         $value = $metric->getValue();
         $type  = gettype($value);
         switch ($type) {
-            case 'boolean': return ($value) ? 'true' : 'false';
+            case 'boolean':
+                return ($value) ? 'true' : 'false';
 
             // Numeric values
             case 'integer':
-            case 'double':  return strval($value);
+            case 'double':
+                return strval($value);
 
-            case 'NULL':    return 'null';
+            case 'NULL':
+                return 'null';
 
             // A string cannot be empty
-            case 'string':  if (!empty($value)) {
-                return strval($value);
-            }
-
-            default:
+            case 'string':
+                if (!empty($value)) {
+                    return strval($value);
+                }
         }
 
         throw new \InvalidArgumentException('Metric value is not a valid DataDog metric type: '.$type);
