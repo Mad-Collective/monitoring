@@ -27,7 +27,7 @@ Metric are statistic values taken at a given point, so it can be graphed and agg
 - **Timers**: Timers are essentially a special case of histograms, but specifically sending time measures.
 
 ### Events
-Events are useful for give context information over the metrics, for example tag a new release, a server migration or a library update.
+Events are useful to give context information over the metrics, for example tag a new release, a server migration or a library update.
 
 ## How to use the Monitoring libraries
 Two new entities have been defined to model real world usage to code.
