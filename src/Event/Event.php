@@ -140,7 +140,7 @@ class Event extends AbstractHasTagsAndTimestamp implements IsTaggableInterface
     /**
      * Returns the event type
      * 
-     * @return mixed
+     * @return string
      */
     public function getType()
     {
@@ -150,7 +150,7 @@ class Event extends AbstractHasTagsAndTimestamp implements IsTaggableInterface
     /**
      * Sets the event type 
      * 
-     * @param mixed $type
+     * @param string $type
      *
      * @return $this
      * @throw \InvalidArgumentException If the type is not valid
@@ -158,7 +158,7 @@ class Event extends AbstractHasTagsAndTimestamp implements IsTaggableInterface
     public function setType($type)
     {
         if (!self::isValidType($type)) {
-            throw new \InvalidArgumentException("$type is not valid event type");
+            throw new \InvalidArgumentException("$type is not a valid event type");
         }
 
         $this->type = $type;
@@ -169,7 +169,7 @@ class Event extends AbstractHasTagsAndTimestamp implements IsTaggableInterface
     /**
      * Checks that the given type is valid
      * 
-     * @param $type
+     * @param string $type
      * 
      * @return bool
      */
