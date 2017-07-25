@@ -53,12 +53,13 @@ class DataDog extends DataDogClient implements SenderInterface
      */
     protected function getFormattedTags(Event $event)
     {
-        $tags = array_map(function ($key, $value) {
+        $tags = [];
+        foreach ($event->getTags() as $key => $value) {
             if (is_bool($value)) {
                 $value = $value ? 'true' : 'false';
             }
-            return "$key:$value";
-        }, $event->getTags());
+            $tags[] = "$key:$value";
+        }
 
         return empty($tags) ? '' : '|#'.implode(',', $tags);
     }
