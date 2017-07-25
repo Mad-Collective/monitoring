@@ -2,48 +2,12 @@
 
 namespace Cmp\Monitoring\Event\Sender;
 
+use Cmp\Monitoring\Integrations\DataDogClient;
 use Cmp\Monitoring\Event\Event;
 use Cmp\Monitoring\Event\SenderInterface;
-use Cmp\Monitoring\Metric\Sender\Socket;
 
-class DataDog implements SenderInterface
+class DataDog extends DataDogClient implements SenderInterface
 {
-    const DATADOG_DEFAULT_SERVER = '127.0.0.1';
-    const DATADOG_DEFAULT_PORT = 8125;
-
-    /**
-     * Socket for sending messages
-     *
-     * @var string
-     */
-    protected $socket;
-
-    /**
-     * DataDog Agent server ip
-     *
-     * @var string
-     */
-    protected $server;
-
-    /**
-     * DataDog Agent port
-     *
-     * @var int
-     */
-    protected $port;
-
-    /**
-     * @param Socket $socket Socket for sending messages
-     * @param string $server DataDog agent host
-     * @param int    $port   Port where DataDog agent is listening to
-     */
-    public function __construct(Socket $socket, $server = self::DATADOG_DEFAULT_SERVER, $port = self::DATADOG_DEFAULT_PORT)
-    {
-        $this->socket = $socket;
-        $this->server = $server;
-        $this->port = $port;
-    }
-
     /**
      * Send an event to a backend
      *
@@ -97,19 +61,6 @@ class DataDog implements SenderInterface
         }, $event->getTags());
 
         return empty($tags) ? '' : '|#'.implode(',', $tags);
-    }
-
-    /**
-     * Send the message over UDP
-     *
-     * @param string $message
-     */
-    protected function flush($message)
-    {
-        $this->socket->create(AF_INET, SOCK_DGRAM, SOL_UDP);
-        $this->socket->setNonBlocking();
-        $this->socket->sendMessage($message, $this->server, $this->port);
-        $this->socket->close();
     }
 
     /**
