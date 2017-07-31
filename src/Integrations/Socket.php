@@ -1,5 +1,6 @@
 <?php
-namespace Cmp\Monitoring\Metric\Sender;
+
+namespace Cmp\Monitoring\Integrations;
 
 class Socket
 {

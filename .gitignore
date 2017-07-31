@@ -5,3 +5,4 @@
 index.php
 coverage.clover
 coverage_integration.clover
+.DS_Store
