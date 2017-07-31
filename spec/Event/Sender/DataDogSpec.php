@@ -41,7 +41,7 @@ class DataDogSpec extends ObjectBehavior
         $message = sprintf(
             "_e{%d,%d}:%s|%s|d:%d|h:%s|t:%s|#%s:%s,%s:%s,%s:%d",
             5,
-            16,
+            15,
             $title,
             'line 1\\\nline 2',
             $timestamp,
