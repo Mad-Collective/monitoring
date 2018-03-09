@@ -57,7 +57,7 @@ class MonitorFactory
      */
     private static function mergeDefaults(array $config)
     {
-        return array_merge([
+        return array_replace_recursive([
             'hostname'     => gethostname(),    # Hostname of the server
             'default_tags' => [],               # A key-value array with default tags for metrics and events
             'logger'       => [
