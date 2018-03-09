@@ -24,11 +24,18 @@ class MetricFactory extends AbstractHasDefaultTags
     const TIMER     = 'timer';
 
     /**
-     * @param array $defaultTags
+     * @var string
      */
-    public function __construct(array $defaultTags = array())
+    private $prefix;
+
+    /**
+     * @param array  $defaultTags
+     * @param string $prefix
+     */
+    public function __construct(array $defaultTags = array(), $prefix = "")
     {
         $this->defaultTags = $defaultTags;
+        $this->prefix      = $prefix;
     }
 
     /**
@@ -43,7 +50,7 @@ class MetricFactory extends AbstractHasDefaultTags
      */
     public function counter($metric, $count = 1, array $tags = array(), $sampleRate = AbstractMetric::DEFAULT_SAMPLE_RATE)
     {
-        return new Counter($metric, $count, array_merge($this->defaultTags, $tags), $sampleRate);
+        return new Counter($this->prefix($metric), $count, array_merge($this->defaultTags, $tags), $sampleRate);
     }
 
     /**
@@ -58,7 +65,7 @@ class MetricFactory extends AbstractHasDefaultTags
      */
     public function gauge($metric, $level, array $tags = array(), $sampleRate = AbstractMetric::DEFAULT_SAMPLE_RATE)
     {
-        return new Gauge($metric, $level, array_merge($this->defaultTags, $tags), $sampleRate);
+        return new Gauge($this->prefix($metric), $level, array_merge($this->defaultTags, $tags), $sampleRate);
     }
 
     /**
@@ -73,7 +80,7 @@ class MetricFactory extends AbstractHasDefaultTags
      */
     public function histogram($metric, $duration = null, array $tags = array(), $sampleRate = AbstractMetric::DEFAULT_SAMPLE_RATE)
     {
-        return new Histogram($metric, $duration, array_merge($this->defaultTags, $tags), $sampleRate);
+        return new Histogram($this->prefix($metric), $duration, array_merge($this->defaultTags, $tags), $sampleRate);
     }
 
     /**
@@ -88,7 +95,7 @@ class MetricFactory extends AbstractHasDefaultTags
      */
     public function timer($metric, $duration = null, array $tags = array(), $sampleRate = AbstractMetric::DEFAULT_SAMPLE_RATE)
     {
-        return new Timer($metric, $duration, array_merge($this->defaultTags, $tags), $sampleRate);
+        return new Timer($this->prefix($metric), $duration, array_merge($this->defaultTags, $tags), $sampleRate);
     }
 
     /**
@@ -103,6 +110,16 @@ class MetricFactory extends AbstractHasDefaultTags
      */
     public function set($metric, $uniqueValue, array $tags =array(), $sampleRate = AbstractMetric::DEFAULT_SAMPLE_RATE)
     {
-        return new Set($metric, $uniqueValue, array_merge($this->defaultTags, $tags), $sampleRate);
+        return new Set($this->prefix($metric), $uniqueValue, array_merge($this->defaultTags, $tags), $sampleRate);
+    }
+
+    /**
+     * @param string $metric
+     *
+     * @return string
+     */
+    private function prefix($metric)
+    {
+        return $this->prefix ? $this->prefix.$metric : $metric;
     }
 }

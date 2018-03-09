@@ -53,7 +53,7 @@ The event entity describes an occurred event at one specific moment.
 ### Creating the entities
 There are two factories created to facilitate the creation of the entities, both allow the creation of the entities and provide default data and tags for them in one step
 
-- **MetricFactory**: Allows the creation of metrics with default tags
+- **MetricFactory**: Allows the creation of metrics with default tags and prefixes
 - **EventFactory**: Allow the creation of Event entities with default host and tags
 
 *NOTE:* Both factories allow to add more default tags after they are instantiated using the method:
@@ -179,7 +179,7 @@ For using the monitor the typical steps are:
 This code is a simplified demonstration of the setup process without the object dependencies.
 ```php
 // Build the metric factory with your choosen default tags
-$metricFactory = new MetricFactory(['environment' => 'dev', 'mode' => 'production']);
+$metricFactory = new MetricFactory(['environment' => 'dev', 'mode' => 'production'], 'myapp-prefix.');
 
 // Build the event factory with the host name and your choosen default tags
 $eventFactory = new EventFactory('my_docker_hostname', ['environment' => 'dev', 'mode' => 'production', 'domain' => 'my_domain']);
@@ -207,10 +207,11 @@ $monitor->increment('wh.page_views');
 $monitor = MonitorFactory::create([
     'hostname'     => 'fooserver',        # Hostname of the server
     'default_tags' => ['foo' => 'bar'],   # A key-value array with default tags for metrics and events
+    'prefix'       => 'my-app.',          # A prefix for the metrics
     'logger'       => [
         'instance' => $logger,            # A Psr\LoggerInterface instance
         'debug'    => true,               # If true, it will log debug messages from the monitor
-        'level'    => LogLevel::DEBUG,  # The level for debug message
+        'level'    => LogLevel::DEBUG,    # The level for debug message
         'metrics'  => true,               # If true, metrics will be sent trough the provided logger instance
         'events'   => true,               # If true, events will be sent trough the provided logger instance
     ],

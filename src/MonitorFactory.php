@@ -60,6 +60,7 @@ class MonitorFactory
         return array_replace_recursive([
             'hostname'     => gethostname(),    # Hostname of the server
             'default_tags' => [],               # A key-value array with default tags for metrics and events
+            'prefix'       => '',               # A prefix for the metrics
             'logger'       => [
                 'instance' => null,             # A Psr\LoggerInterface instance
                 'debug'    => false,            # If true, it will log debug messages from the monitor  
