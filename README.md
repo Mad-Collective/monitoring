@@ -170,6 +170,7 @@ public function sendEvent(Event $event);
 ```
 
 ### Typical setup
+**NOTE**: *Now there is a factory that can be used to ease the creation method, see the next section*
 For using the monitor the typical steps are:
 * Create a monitor with the provided Metric and Event factories
 * Create and push the metric senders and events sender to the monitor
@@ -201,6 +202,27 @@ $monitor
 $monitor->increment('wh.page_views');
 ```
 
+#### Creation through the factory
+```php
+$monitor = MonitorFactory::create([
+    'hostname'     => 'fooserver',        # Hostname of the server
+    'default_tags' => ['foo' => 'bar'],   # A key-value array with default tags for metrics and events
+    'logger'       => [
+        'instance' => $logger,            # A Psr\LoggerInterface instance
+        'debug'    => true,               # If true, it will log debug messages from the monitor
+        'level'    => LogLevel::DEBUG,  # The level for debug message
+        'metrics'  => true,               # If true, metrics will be sent trough the provided logger instance
+        'events'   => true,               # If true, events will be sent trough the provided logger instance
+    ],
+    'datadog'      => [
+        'metrics'  => true,               # If true, metrics will be sent trough the datadog agent
+        'events'   => true,               # If true, events will be sent trough the datadog agent
+        'host'     => '10.0.0.1',         # The datadog agent host, if null the default will be used
+        'port'     => 8822,               # The datadog agent port, if null the default will be used
+    ],
+]);
+```
+**NOTE** The factory comes with some default values, you can see them in the MonitorFactory code
 ## Available back end senders
 
 ### Psr-3 logger
