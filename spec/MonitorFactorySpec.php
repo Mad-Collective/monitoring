@@ -26,6 +26,7 @@ class MonitorFactorySpec extends ObjectBehavior
         $monitor = $this->create([
             'hostname'     => 'fooserver',
             'default_tags' => ['foo' => 'bar'],
+            'prefix'       => 'my-app.',
             'logger'       => [
                 'instance' => $logger,
                 'debug'    => true,  
@@ -49,6 +50,7 @@ class MonitorFactorySpec extends ObjectBehavior
         $monitor = $this->create([
             'hostname'     => 'fooserver',
             'default_tags' => ['foo' => 'bar'],
+            'prefix'       => 'my-app.',
             'logger'       => [
                 'instance' => $logger,
                 'debug'    => true,

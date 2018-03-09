@@ -25,7 +25,7 @@ class MonitorFactory
     public static function create(array $config = [])
     {
         $config        = self::mergeDefaults($config);
-        $metricFactory = new MetricFactory($config['default_tags']);
+        $metricFactory = new MetricFactory($config['default_tags'], $config['prefix']);
         $eventFactory  = new EventFactory($config['hostname']);
         $logger        = $config['logger']['instance'] instanceof LoggerInterface ? $config['logger']['instance'] : null;
         $debug         = $config['logger']['debug'];
@@ -60,6 +60,7 @@ class MonitorFactory
         return array_replace_recursive([
             'hostname'     => gethostname(),    # Hostname of the server
             'default_tags' => [],               # A key-value array with default tags for metrics and events
+            'prefix'       => '',               # A prefix for the metrics
             'logger'       => [
                 'instance' => null,             # A Psr\LoggerInterface instance
                 'debug'    => false,            # If true, it will log debug messages from the monitor  

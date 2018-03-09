@@ -9,7 +9,7 @@ class MetricFactorySpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('default_tag' => 'default'));
+        $this->beConstructedWith(array('default_tag' => 'default'), 'prefix.');
     }
 
     function it_can_be_initialized()
@@ -19,8 +19,10 @@ class MetricFactorySpec extends ObjectBehavior
 
     function it_can_create_counters()
     {
-        $this->counter('name', 10, array('tags'), .5)
-            ->shouldReturnAnInstanceOf('\Cmp\Monitoring\Metric\Type\Counter');
+        $counter = $this->counter('name', 10, array('tags'), .5);
+        $counter->shouldBeAnInstanceOf('\Cmp\Monitoring\Metric\Type\Counter');
+
+        $counter->getName()->shouldReturn('prefix.name');
     }
 
     function it_can_create_gauges()
