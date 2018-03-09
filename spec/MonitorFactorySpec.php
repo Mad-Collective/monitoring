@@ -43,4 +43,25 @@ class MonitorFactorySpec extends ObjectBehavior
 
         $monitor->shouldBeAnInstanceOf(Monitor::class);
     }
+
+    function it_can_built_an_working_monitor_from_half_config(LoggerInterface $logger)
+    {
+        $monitor = $this->create([
+            'hostname'     => 'fooserver',
+            'default_tags' => ['foo' => 'bar'],
+            'logger'       => [
+                'instance' => $logger,
+                'debug'    => true,
+                'metrics'  => true,
+                'events'   => true,
+            ],
+            'datadog'      => [
+                'metrics'  => true,
+                'events'   => true,
+                'host'     => '10.0.0.1'
+            ],
+        ]);
+
+        $monitor->shouldBeAnInstanceOf(Monitor::class);
+    }
 }
