@@ -44,6 +44,21 @@ class DataDogClient
     }
 
     /**
+     * @param string $host
+     * @param int    $port
+     *
+     * @return static
+     */
+    public static function create($host = self::DATADOG_DEFAULT_SERVER, $port = self::DATADOG_DEFAULT_PORT)
+    {
+        return new static(
+            new Socket(), 
+            $host ? $host : self::DATADOG_DEFAULT_SERVER, 
+            $port ? $port : self::DATADOG_DEFAULT_PORT
+        );
+    }
+
+    /**
      * Send the message over UDP
      *
      * @param $message
