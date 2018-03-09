@@ -19,6 +19,8 @@ class MonitorFactory
      * See the method 'mergeDefaults' for info on the config format
      *
      * @param array $config
+     *
+     * @return Monitor
      */
     public static function create(array $config = [])
     {
@@ -26,7 +28,7 @@ class MonitorFactory
         $metricFactory = new MetricFactory($config['default_tags']);
         $eventFactory  = new EventFactory($config['hostname']);
         $logger        = $config['logger']['instance'] instanceof LoggerInterface ? $config['logger']['instance'] : null;
-        $debug         = $config['logger']['debug']; 
+        $debug         = $config['logger']['debug'];
         $monitor       = new Monitor($metricFactory, $eventFactory, $debug ? $logger : null);
 
         if (!empty($config['datadog']['metrics'])) {
@@ -55,7 +57,7 @@ class MonitorFactory
      */
     private static function mergeDefaults(array $config)
     {
-        return array_merge($config, [
+        return array_merge([
             'hostname'     => gethostname(),    # Hostname of the server
             'default_tags' => [],               # A key-value array with default tags for metrics and events
             'logger'       => [
@@ -71,6 +73,6 @@ class MonitorFactory
                 'host'     => null,             # The datadog agent host, if null the default will be used
                 'port'     => null,             # The datadog agent port, if null the default will be used
             ],
-        ]);
+        ], $config);
     }
 }

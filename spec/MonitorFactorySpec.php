@@ -24,23 +24,21 @@ class MonitorFactorySpec extends ObjectBehavior
     function it_can_built_an_working_monitor(LoggerInterface $logger)
     {
         $monitor = $this->create([
-            [
-                'hostname'     => 'fooserver',
-                'default_tags' => ['foo' => 'bar'],
-                'logger'       => [
-                    'instance' => $logger,
-                    'debug'    => true,  
-                    'level'    => LogLevel::WARNING,
-                    'metrics'  => true,
-                    'events'   => true,
-                ],
-                'datadog'      => [
-                    'metrics'  => true,
-                    'events'   => true,
-                    'host'     => '10.0.0.1',
-                    'port'     => 8822,
-                ],
-            ]
+            'hostname'     => 'fooserver',
+            'default_tags' => ['foo' => 'bar'],
+            'logger'       => [
+                'instance' => $logger,
+                'debug'    => true,  
+                'level'    => LogLevel::WARNING,
+                'metrics'  => true,
+                'events'   => true,
+            ],
+            'datadog'      => [
+                'metrics'  => true,
+                'events'   => true,
+                'host'     => '10.0.0.1',
+                'port'     => 8822,
+            ],
         ]);
 
         $monitor->shouldBeAnInstanceOf(Monitor::class);
