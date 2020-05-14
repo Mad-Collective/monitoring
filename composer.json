@@ -2,7 +2,7 @@
   "name": "pluggit/monitoring",
   "description": "Monitoring abstraction layer",
   "require": {
-    "php": "^5.5|^7.0",
+    "php": "^7.2",
     "psr/log": "^1.0"
   },
   "require-dev": {
@@ -12,7 +12,7 @@
     "squizlabs/php_codesniffer": "2.*",
     "henrikbjorn/phpspec-code-coverage": "2.*",
     "phpunit/php-code-coverage": "^2.2",
-    "monolog/monolog": "^1.23"
+    "monolog/monolog": "^2.0"
   },
   "license": "MIT",
   "autoload": {

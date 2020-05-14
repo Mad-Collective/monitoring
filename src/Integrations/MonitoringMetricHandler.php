@@ -40,7 +40,7 @@ class MonitoringMetricHandler extends AbstractProcessingHandler
      *
      * @return void
      */
-    protected function write(array $record)
+    protected function write(array $record): void
     {
         $this->monitor->increment($this->metric, [
             'channel' => $record['channel'],
