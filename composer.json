@@ -1,7 +1,6 @@
 {
   "name": "pluggit/monitoring",
   "description": "Monitoring abstraction layer",
-  "version": "2.0",
   "require": {
     "php": "^7.2",
     "psr/log": "^1.0"
