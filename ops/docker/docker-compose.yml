@@ -1,23 +1,15 @@
 version: '2'
 
 services:
-  php7:
-    build: ./7
+  php72:
+    build: ./72
     volumes:
       - ../../:/app/monitoring
     working_dir: /app/monitoring
-    command: make test
-
-  php56:
-      build: ./56
-      volumes:
-        - ../../:/app/monitoring
-      working_dir: /app/monitoring
-      command: make test
-
-  php55:
-      build: ./55
-      volumes:
-        - ../../:/app/monitoring
-      working_dir: /app/monitoring
-      command: make test
+    command: [bash, -c, "composer install && make test"]
+  php74:
+    build: ./74
+    volumes:
+      - ../../:/app/monitoring
+    working_dir: /app/monitoring
+    command: [bash, -c, "composer install && make test"]

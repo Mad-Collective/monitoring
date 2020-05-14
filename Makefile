@@ -6,10 +6,11 @@ APP_ROOT := /app/monitoring
 all: dev nodev
 
 dev:
-	@docker-compose -p ${COMPONENT} -f ops/docker/docker-compose.yml up
+	@docker-compose -p ${COMPONENT} -f ops/docker/docker-compose.yml up --remove-orphans --force-recreate
 
 nodev:
-	@docker-compose -p ${COMPONENT} -f ops/docker/docker-compose.yml rm -fa > /dev/null
+	@docker-compose -p ${COMPONENT} -f ops/docker/docker-compose.yml kill
+	@docker-compose -p ${COMPONENT} -f ops/docker/docker-compose.yml rm -f
 ifeq ($(IMAGES),true)
 	@docker rmi ${COMPONENT}_${CONTAINER}
 endif
