@@ -1,4 +1,4 @@
-FROM php:7.2-alpine
+FROM php:8.1-alpine
 
 RUN apk add --no-cache --virtual .deps \
                 git \
