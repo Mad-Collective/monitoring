@@ -6,11 +6,9 @@ services:
     volumes:
       - ../../:/app/monitoring
     working_dir: /app/monitoring
-    command: make test
 
   php80:
     build: ./80
     volumes:
       - ../../:/app/monitoring
     working_dir: /app/monitoring
-    command: make test
