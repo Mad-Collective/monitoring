@@ -1,12 +1,15 @@
 COMPONENT := pluggitmonitoring
-CONTAINER := phpfarm
+CONTAINER := php80
 IMAGES ?= false
 APP_ROOT := /app/monitoring
 
 all: dev nodev
 
 dev:
-	@docker-compose -p ${COMPONENT} -f ops/docker/docker-compose.yml up
+	@docker-compose -p ${COMPONENT} -f ops/docker/docker-compose.yml up -d --build
+
+enter:
+	@docker exec -ti ${COMPONENT}_${CONTAINER}_1 /bin/sh
 
 nodev:
 	@docker-compose -p ${COMPONENT} -f ops/docker/docker-compose.yml rm -fa > /dev/null
