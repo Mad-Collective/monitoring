@@ -1,6 +1,12 @@
 version: '2'
 
 services:
+  php84:
+    build: ./84
+    volumes:
+      - ../../:/app/monitoring
+    working_dir: /app/monitoring
+
   php81:
     build: ./81
     volumes:
