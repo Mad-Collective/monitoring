@@ -68,7 +68,7 @@ class Monitor
      * @param EventFactory    $eventFactory  Factory for creating events
      * @param LoggerInterface $logger        For logging errors
      */
-    public function __construct(MetricFactory $metricFactory, EventFactory $eventFactory, LoggerInterface $logger = null)
+    public function __construct(MetricFactory $metricFactory, EventFactory $eventFactory, ?LoggerInterface $logger = null)
     {
         $this->metricFactory = $metricFactory;
         $this->eventFactory  = $eventFactory;

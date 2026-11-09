@@ -1,5 +1,5 @@
 COMPONENT := pluggitmonitoring
-CONTAINER := php80
+CONTAINER := php84
 IMAGES ?= false
 APP_ROOT := /app/monitoring
 
@@ -17,13 +17,15 @@ ifeq ($(IMAGES),true)
 	@docker rmi ${COMPONENT}_${CONTAINER}
 endif
 
+deps:
+	@docker-compose -p ${COMPONENT} -f ops/docker/docker-compose.yml exec -T ${CONTAINER} \
+	 composer install --no-interaction
+
 test: unit
 
-deps:
-	@composer install --no-interaction
-
 unit:
-	@${APP_ROOT}/ops/scripts/unit.sh
+	@docker-compose -p ${COMPONENT} -f ops/docker/docker-compose.yml exec -T ${CONTAINER} \
+	 ${APP_ROOT}/ops/scripts/unit.sh
 
 ps: status
 status:
